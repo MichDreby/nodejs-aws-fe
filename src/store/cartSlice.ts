@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from 'store/store';
-import {Product} from "models/Product";
+import {Flat, Product} from "models/Product";
 import {CartItem} from "models/CartItem";
 
 interface CartState {
@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    addToCart: (state, action: PayloadAction<Product>) => {
+    addToCart: (state, action: PayloadAction<Flat>) => {
       const {items} = state;
       const {payload: product} = action;
       const existingItem = items.find(i => i.product.id === product.id);
@@ -27,7 +27,7 @@ export const cartSlice = createSlice({
       items.push({product, count: 1});
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
-    removeFromCart: (state, action: PayloadAction<Product>) => {
+    removeFromCart: (state, action: PayloadAction<Flat>) => {
       let {items} = state;
       const {payload: product} = action;
       const existingItem = items.find(i => i.product.id === product.id);
