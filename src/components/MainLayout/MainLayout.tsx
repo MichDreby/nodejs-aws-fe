@@ -47,7 +47,7 @@ const MainLayout: React.FC = ({children}) => {
           Contact us: mr.sincee@gmail.com
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Contact us: mikhail_dziarbeyeu@epam.com
+          Contact us1: mikhail_dziarbeyeu@epam.com
         </Typography>
         <Copyright/>
       </footer>
