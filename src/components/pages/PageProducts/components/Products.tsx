@@ -6,12 +6,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
-import {Product} from "models/Product";
+import {Flat, Product} from "models/Product";
 import {formatAsPrice} from "utils/utils";
 import AddProductToCart from "components/AddProductToCart/AddProductToCart";
-// import axios from 'axios';
-// import API_PATHS from "constants/apiPaths";
-import productList from "./productList.json";
+import axios from 'axios';
+import API_PATHS from "constants/apiPaths";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -33,17 +32,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Products() {
   const classes = useStyles();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Flat[]>([]);
 
-  useEffect(() => {
-    // axios.get(`${API_PATHS.bff}/product/available/`)
-    //   .then(res => setProducts(res.data));
-    setProducts(productList);
-  }, [])
+  useEffect(
+    () => {
+      axios.get(`${API_PATHS.flats}`)
+        .then(({ data }) => {
+          setProducts(data)
+        })
+    },
+    []
+  );
+
 
   return (
     <Grid container spacing={4}>
-      {products.map((product: Product) => (
+      {products.map((product: Flat) => (
         <Grid item key={product.id} xs={12} sm={6} md={4}>
           <Card className={classes.card}>
             <CardMedia
@@ -53,7 +57,7 @@ export default function Products() {
             />
             <CardContent className={classes.cardContent}>
               <Typography gutterBottom variant="h5" component="h2">
-                {product.title}
+                {product.address}
               </Typography>
               <Typography>
                 {formatAsPrice(product.price)}

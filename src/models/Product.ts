@@ -7,6 +7,16 @@ export type Product = {
   price: number,
 };
 
+export type Flat = {
+  id: string,
+  address: string,
+  area: number,
+  city: string,
+  district: string,
+  price: number
+  rooms: number
+};
+
 export const ProductSchema = Yup.object().shape({
   title: Yup.string().required(),
   description: Yup.string(),
